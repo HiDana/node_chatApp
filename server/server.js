@@ -10,8 +10,27 @@ var server = http.createServer(app)
 var io = socketIO(server)
 
 app.use(express.static(publicPath))
+
 io.on('connection', (socket) => {
 	console.log('new user connect')
+
+	// socket.emit('newEmail', {
+	// 	from: 'dana@gmail.com',
+	// 	text: 'youyuooy',
+	// 	createAt: 123
+	// })
+	socket.emit('newMessage', {
+		from: 'Samie',
+		text: 'See you then',
+		createAt: 123123
+	})
+
+	// socket.on('createEmail', (newEmail) => {
+	// 	console.log('creatEmail', newEmail)
+	// })
+	socket.on('createMessage', (message) => {
+		console.log('creatMessage', message)
+	})
 
 	socket.on('disconnect', () => {
 		console.log('useer was disconnected')
